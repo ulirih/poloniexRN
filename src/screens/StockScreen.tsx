@@ -5,7 +5,7 @@ import {
     ViewStyle,
     ActivityIndicator, FlatList, TextStyle, Dimensions,
 } from "react-native";
-import React, {Component} from "react";
+import React, {PureComponent} from "react";
 import {NavigationScreenOptions} from "react-navigation";
 import {inject, observer} from "mobx-react/native";
 import {ITicker} from "../stores/StockStore";
@@ -14,7 +14,7 @@ const windowWidth = Dimensions.get('window').width;
 
 @inject("stockStore")
 @observer
-export class StockScreen extends Component<any> {
+export class StockScreen extends PureComponent<any> {
     static navigationOptions: NavigationScreenOptions;
 
     private handlerId: number;
