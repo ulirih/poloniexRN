@@ -1,0 +1,40 @@
+{
+  "name": "poloniexRN",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "test": "jest",
+    "android:start": "react-native run-android",
+    "tsc": "tsc",
+    "clean": "rimraf artifacts",
+    "build": "npm run clean && npm run tsc --",
+    "ts": "tsc -p .",
+    "tsw": "npm run ts --watch"
+  },
+  "dependencies": {
+    "@types/react-navigation": "^2.0.4",
+    "babel-plugin-transform-class-properties": "^6.24.1",
+    "babel-plugin-transform-decorators-legacy": "^1.3.5",
+    "es6-symbol": "^3.1.1",
+    "mobx": "^5.0.2",
+    "mobx-react": "^5.2.3",
+    "react": "16.3.1",
+    "react-native": "0.55.4",
+    "react-navigation": "^2.3.0",
+    "reflect-metadata": "^0.1.12"
+  },
+  "devDependencies": {
+    "@types/react": "^16.3.17",
+    "@types/react-native": "^0.55.18",
+    "babel-jest": "23.0.1",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "23.1.0",
+    "react-native-typescript-transformer": "^1.2.9",
+    "react-test-renderer": "16.3.1",
+    "typescript": "^2.9.1"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
