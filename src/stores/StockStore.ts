@@ -19,19 +19,20 @@ class StockStore {
         this.isLoading = true;
         this.error = null;
         try {
-            const res = await ApiService.getTickers();
+            const response = await ApiService.getTickers();
             const result: ITicker[] = [];
-            for (let key in res) {
+            for (let key in response) {
                 result.push({
-                    id: res[key].id,
+                    id: response[key].id,
                     name: key,
-                    percentChange: res[key].percentChange,
-                    last: res[key].last,
-                    highestBid: res[key].highestBid
+                    percentChange: response[key].percentChange,
+                    last: response[key].last,
+                    highestBid: response[key].highestBid
                 })
             }
             this.tickers = [...result];
         } catch (e) {
+            console.log("Get tickers error: ", e);
             this.error = e.message;
         } finally {
             this.isLoading = false;

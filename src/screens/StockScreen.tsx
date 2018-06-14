@@ -9,6 +9,7 @@ import React, {Component} from "react";
 import {NavigationScreenOptions} from "react-navigation";
 import {inject, observer} from "mobx-react/native";
 import {ITicker} from "../stores/StockStore";
+import {Colors} from "../resources/Colors";
 
 const windowWidth = Dimensions.get('window').width;
 
@@ -25,11 +26,14 @@ export class StockScreen extends Component<any> {
     }
 
     async componentDidMount(): Promise<void> {
+        console.log("Start observe");
+
         await this.getTickers();
         this.handlerId = setInterval(this.getTickers, this.TIME_INTERVAL);
     }
 
     componentWillUnmount(): void {
+        console.log("End observe");
         clearInterval(this.handlerId);
     }
 
@@ -62,7 +66,7 @@ export class StockScreen extends Component<any> {
 
     private renderItem = ({item}: {item: ITicker}): JSX.Element => {
         const percent = parseFloat(item.percentChange);
-        const percentStyle = StyleSheet.flatten([styles.baseText, {color: percent < 0 ? "#FD4F4F" : "#22B14C"}]);
+        const percentStyle = StyleSheet.flatten([styles.baseText, {color: percent < 0 ? Colors.Red : Colors.Green}]);
 
         return (
             <View style={styles.tickerContainer}>
@@ -81,7 +85,7 @@ export class StockScreen extends Component<any> {
     private renderErrorPanel = (): JSX.Element => {
         return (
             <View style={styles.errorContainer}>
-                <Text style={{textAlign: "center", color: "#fff"}}>{this.props.stockStore.error}</Text>
+                <Text style={styles.errorText}>{this.props.stockStore.error}</Text>
             </View>
         );
     };
@@ -89,8 +93,8 @@ export class StockScreen extends Component<any> {
 
 StockScreen.navigationOptions = {
     title: "Stock",
-    headerStyle: {backgroundColor: "#145A5C"},
-    headerTintColor: '#fff',
+    headerStyle: {backgroundColor: Colors.HeaderColor},
+    headerTintColor: Colors.White,
 };
 
 const styles = StyleSheet.create({
@@ -104,11 +108,11 @@ const styles = StyleSheet.create({
     } as ViewStyle,
     baseText: {
         fontSize: 17,
-        color: "#000"
+        color: Colors.Black
     } as TextStyle,
     tickerContainer: {
         padding: 12,
-        backgroundColor: "#fff",
+        backgroundColor: Colors.White,
         marginHorizontal: 7,
         marginVertical: 5
     } as ViewStyle,
@@ -126,7 +130,11 @@ const styles = StyleSheet.create({
         top: 0,
         left: 0,
         width: windowWidth,
-        backgroundColor: "#FD4F4F",
+        backgroundColor: Colors.Red,
         padding: 20
+    } as ViewStyle,
+    errorText: {
+        textAlign: "center",
+        color: Colors.White
     }
 });
